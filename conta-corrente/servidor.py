@@ -4,10 +4,13 @@
 import sys
 import socket
 
-TCP_IP = '127.0.0.1'
+TCP_IP = ''
 TCP_PORT = 6006
 BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 resposta = None
+dados = None
+operacao = None
+valor = 0
 
 if not len(sys.argv) >= 2:
     print ("[SERVIDOR][ERRO] O valor do saldo deve ser informado.")
@@ -26,16 +29,24 @@ conn, addr = s.accept()
 print ('[SERVIDOR] Conexao com o cliente realizada. Endereco da conexao:', addr)
 while 1:
     print ("[SERVIDOR] Aguardando dados do cliente")
-    operacao = conn.recv(BUFFER_SIZE).decode("utf-8")
-    if not operacao: break
-    print ("[SERVIDOR] Dados recebidos do cliente com sucesso: \"" + operacao + "\"")
+    dados = conn.recv(BUFFER_SIZE).decode("utf-8")
+    if not dados: break
+    print ("[SERVIDOR] Dados recebidos do cliente com sucesso: \"" + dados + "\"")
     
-    # TODO interpretar a operacao
-    # ... 
-    # TODO alterar saldo se necessario
-    # ...
-    
-    resposta = str(saldo)
+    # interpretar a dados
+    operacao = dados.strip().split(' ')
+    if operacao[0] == 'SALDO':
+        resposta = str(saldo)
+    elif operacao[0] == 'DEBITO':
+        valor = int(operacao[1])
+        saldo -= valor
+        resposta = str(saldo)
+    elif operacao[0] == 'CREDITO':
+        valor = int(operacao[1])
+        saldo += valor
+        resposta = str(saldo)
+    else: 
+        resposta = 'ERRO'
 
     print ("[SERVIDOR] Enviando resposta para o cliente")
     conn.send(resposta.encode())  # echo
