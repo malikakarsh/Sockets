@@ -64,3 +64,4 @@ socket_close($socket);
 <input type="submit" name="operacao" value="EXTRATO" />
 </form>
 </body>
+</html>
