@@ -17,14 +17,14 @@ if len(sys.argv) >= 2:
 if len(sys.argv) >= 3:
     MESSAGE = sys.argv[2]
 
-print ("[CLIENTE] Iniciando")
+print("[CLIENTE] Iniciando")
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print ("[CLIENTE] Conectando")
+print("[CLIENTE] Conectando")
 s.connect((TCP_IP, TCP_PORT))
-print ("[CLIENTE] Enviando dados: \"" + MESSAGE + "\"")
+print("[CLIENTE] Enviando dados: \"" + MESSAGE + "\"")
 s.send((MESSAGE + '\n').encode('utf-8'))
-print ("[CLIENTE] Recebendo dados do CLIENTE")
+print("[CLIENTE] Recebendo dados do CLIENTE")
 msg = ''
 fim_msg = False
 dados = bytearray()
@@ -35,9 +35,9 @@ while not fim_msg:
 	if b'\n' in recvd:
 		msg = dados.rstrip(b'\n').decode('utf-8')
 		fim_msg = True
-print ("[CLIENTE] Recebidos no total ", len(dados), " bytes")
-print ("[CLIENTE] Dados recebidos em resposta do CLIENTE: \"" + msg + "\"")
-print ("[CLIENTE] Fechando conexão com o CLIENTE")
+print("[CLIENTE] Recebidos no total ", len(dados), " bytes")
+print("[CLIENTE] Dados recebidos em resposta do CLIENTE: \"" + msg + "\"")
+print("[CLIENTE] Fechando conexão com o CLIENTE")
 s.close()
 
-print ("[CLIENTE] Fim")
+print("[CLIENTE] Fim")

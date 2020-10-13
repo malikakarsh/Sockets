@@ -7,12 +7,12 @@ Com o PATH configurado corretamente (veja abaixo como configurar),  inicie o ser
 
 No terminal 1, do servidor:
 ```CMD
-python echo/servidor.py
+python3 echo/servidor.py
 ```
 
 No terminal 2, do cliente:
 ```CMD
-python echo/cliente.py
+python3 echo/cliente.py
 ```
 
 O resultado esperado é:
@@ -35,5 +35,4 @@ Para utilizar o servidor de echo você precisa do Interpretador Python instalado
 Considerando que o Python esteja instalado em "C:\Python27\" e que o PATH não contenha esse fragmento, para adicionar o Python ao PATH no Prompt de Comando do Windows, digite o seguinte comando:
 
 ```CMD
-SET PATH=%PATH%;C:\Python27\
 ```
